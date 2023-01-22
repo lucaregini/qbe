@@ -272,11 +272,11 @@ Next:
 	case '=':
 		sz = KWIDE(i->cls) ? SLong : SWord;
 		s--;
-		goto Ref;
+		goto RefLabel;
 	case 'D':
 	case 'S':
 		sz = SLong; /* does not matter for floats */
-	Ref:
+	RefLabel:
 		c = *s++;
 		ref = getarg(c, i);
 		switch (rtype(ref)) {
@@ -288,7 +288,7 @@ Next:
 			fprintf(f, "%d(%%rbp)", slot(ref, fn));
 			break;
 		case RMem:
-		Mem:
+		MemLabel:
 			m = &fn->mem[ref.val];
 			if (rtype(m->base) == RSlot) {
 				off.type = CBits;
@@ -320,22 +320,22 @@ Next:
 		break;
 	case 'L':
 		sz = SLong;
-		goto Ref;
+		goto RefLabel;
 	case 'W':
 		sz = SWord;
-		goto Ref;
+		goto RefLabel;
 	case 'H':
 		sz = SShort;
-		goto Ref;
+		goto RefLabel;
 	case 'B':
 		sz = SByte;
-		goto Ref;
+		goto RefLabel;
 	case 'M':
 		c = *s++;
 		ref = getarg(c, i);
 		switch (rtype(ref)) {
 		case RMem:
-			goto Mem;
+			goto MemLabel;
 		case RSlot:
 			fprintf(f, "%d(%%rbp)", slot(ref, fn));
 			break;

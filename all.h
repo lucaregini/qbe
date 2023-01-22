@@ -5,6 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef ATTR_UNUSED
+#define __attribute__(A) /* do nothing we are on windows*/
+#endif
+
+
 #define MAKESURE(what, x) typedef char make_sure_##what[(x)?1:-1]
 #define die(...) die_(__FILE__, __VA_ARGS__)
 

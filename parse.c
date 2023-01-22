@@ -673,7 +673,7 @@ DoOp:
 			arg[1] = R;
 		if (k >= Ksb)
 			k = Kw;
-		goto Ins;
+		goto InsLabel;
 	}
 	if (op == Tloadw)
 		op = Oloadsw;
@@ -744,7 +744,7 @@ DoOp:
 	default:
 		if (op >= NPubOp)
 			err("invalid instruction");
-	Ins:
+	InsLabel:
 		if (curi - insb >= NIns)
 			err("too many instructions");
 		curi->op = op;
